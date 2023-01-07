@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('get_video/', views.search_youtube_videos, name="get_video"),
+    path('fetch_video_data/', views.fetch_youtube_videos, name="fetch_youtube_videos"),
 ]

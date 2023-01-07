@@ -8,7 +8,7 @@ from youtube_solution.serializer import *
 
 
 @api_view(['GET'])
-def search_youtube_videos(request: Request):
+def fetch_youtube_videos(request: Request):
     try:
         params = request.GET.dict()
         api_serializer = TitleAndDescriptionSerializer(data=params)
@@ -21,7 +21,7 @@ def search_youtube_videos(request: Request):
             filter['description']=api_serializer.validated_data['description']
 
         query_list = list(Video.objects.filter(**filter).values().order_by('-publishedDateTime'))
-        paginator = Paginator(query_list, 2) # Show 25 contacts per page.
+        paginator = Paginator(query_list, 5) # Show 5 contacts per page.
         page_obj = paginator.get_page(page_number)
         return Response(page_obj.object_list, status=status.HTTP_200_OK)
     except Exception as e:
