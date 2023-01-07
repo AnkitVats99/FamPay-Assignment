@@ -30,19 +30,16 @@ def search_youtube_videos(request: Request):
         api_serializer = TitleAndDescriptionSerializer(data=params)
         api_serializer.is_valid(raise_exception=True)
         page_number = api_serializer.validated_data['page_number'] 
-        title = api_serializer.validated_data['title'] 
-        description = api_serializer.validated_data['description'] 
+        filter = dict()
+        if api_serializer.validated_data.get('title'):
+            filter['title']=api_serializer.validated_data['title'] 
+        if api_serializer.validated_data.get('description'):
+            filter['description']=api_serializer.validated_data['description']
 
-
-        query_list = list(Video.objects.filter('title'=title,'description'=description).values().order_by('-publishedDateTime'))
+        query_list = list(Video.objects.filter(**filter).values().order_by('-publishedDateTime'))
         paginator = Paginator(query_list, 2) # Show 25 contacts per page.
-
-
-
-        #page_number = request.GET.get('page')
-        page_obj = paginator.get_page(1)
+        page_obj = paginator.get_page(page_number)
         return Response(page_obj.object_list, status=status.HTTP_200_OK)
-        #return render(request, 'list.html', {'page_obj': page_obj})
     except Exception as e:
         return Response({"msg": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
