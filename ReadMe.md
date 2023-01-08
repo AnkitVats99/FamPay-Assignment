@@ -5,6 +5,6 @@
 5) install attached requirements.txt >> ```pip install -r requirements.txt```
 6) make the server up          >> ```python manage.py runserver```
 7) for running cron every minute, cron-tab functionality of linux is used 
-    >> https://django-cron.readthedocs.io/en/latest/installation.html
+    >> ```https://django-cron.readthedocs.io/en/latest/installation.html```
 
 
