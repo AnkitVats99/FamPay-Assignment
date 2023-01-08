@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'videos',
-    'rest_framework'
+    'rest_framework',
+    "django_cron"
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'youtube_solution.urls'
+
+CRON_CLASSES = [
+    "youtube_solution.cron.MyCronJob",
+]
 
 TEMPLATES = [
     {
