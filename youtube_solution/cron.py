@@ -40,4 +40,5 @@ class MyCronJob(CronJobBase):
                 channel_title=channel_title,
                 publishedDateTime=publishedDateTime,
                 thumbnailsUrls=thumbnailsUrls,
+                created=datetime.now()
             )
